@@ -15,10 +15,10 @@ int main() {
   vector<media*> vect;
   char* firstTitle = new char[80];
   strcpy(firstTitle, "First Title");
-  list[0] = new media(firstTitle);
+  list[0] = new media(firstTitle, 2001);
   char* secondTitle = new char[80];
   strcpy(secondTitle, "Second Title");
-  list[1] = new media(secondTitle);
+  list[1] = new media(secondTitle, 1998);
   printArrayTitles(list, SIZE);
   vect.push_back(list[0]);
   vect.push_back(list[1]);
