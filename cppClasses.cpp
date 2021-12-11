@@ -13,7 +13,7 @@ const int SIZE = 77;
 void printArrayTitles(media**, int);
 void printVectorTitles(vector<media*> &);
 
-int main() {
+int test() {
   media* list[SIZE];
   vector<media*> vect;
   for (int i = 0; i < SIZE; i++) {
@@ -43,6 +43,7 @@ int main() {
       delete(list[i]); 
     }
   }
+  return 0;
 }
 
 void printArrayTitles(media** newlist, int size) {
@@ -63,5 +64,78 @@ void printVectorTitles(vector<media*> &newvect) {
     (*it)->print();
     cout << endl;
     //cout << *(*it)->getTitle() << endl;
+  }
+}
+
+music* getMusic() {
+  char input[50];
+  char tempTitle[50];
+  int tempYear;
+  char tempPublish[50];
+  char tempDur[50];
+  char tempArt[50];
+  //change to cstring stuff
+  cout << "Musis title: ";
+  cin.getline(tempTitle, 50, '\n');
+  cout << "Year produced: ";
+  cin.getline(input, 50, '\n');
+  tempYear = atoi(input);
+  cout << "Music publisher: ";
+  cin.getline(tempPublish, 50, '\n');
+  cout << "Music duration: ";
+  cin.getline(tempDur, 50, '\n');
+  cout << "Music artist: ";
+  cin.getline(tempArt, 50, '\n');
+
+  return new music(tempTitle, tempYear, tempPublish, tempDur, tempArt);
+}
+
+int main() {
+  test();
+  
+  char input[50];
+
+  vector<media*> vectMedia;
+  
+  while (true) {
+    //initialize empty media vector
+    //print possible cmds
+    cout << "COMMANDS: "<< endl << "ADD: Create a new entry to the media list"
+         << endl << "PRINT: Prints all current entries in the media list"
+         << endl << "DELETE: Deletes speciied media from the list"
+         << endl << "QUIT: Exits the program" << endl;
+    cin.getline(input, 50, '\n');
+    //if ADD, add new media
+    if (strcmp(input,"ADD") == 0 || strcmp(input,"add") == 0) {
+      vectMedia.push_back(getMusic());
+      cout << "Media added! " << endl;
+    }
+    //if PRINT, print all currently stored medias
+    else if (strcmp(input,"PRINT") == 0 || strcmp(input,"print") == 0) {
+      printVectorTitles(vectMedia);
+    }
+    //if DELETE, delete media from list
+    else if (strcmp(input,"DELETE") == 0 || strcmp(input,"delete") == 0) {
+      int delYear;
+      cout << "Enter the year of the media you would like to remove from the list: " << endl;
+      cin.getline(input, 50, '\n');
+      delYear = atoi (input);
+      vector<media*>::iterator it;
+      for (it = vectMedia.begin(); it != vectMedia.end(); it++) {
+	if (delYear == (*it)->getYear()) {
+	  delete((*it));
+	  vectMedia.erase(it);
+	}
+      }
+    }
+    //if QUIT, exit program
+    else if (strcmp(input,"QUIT") == 0 || strcmp(input,"quit") == 0) {
+      break;
+    }
+    //else, cmd not recognized
+    else if (strcmp(input,"QUIT") != 0 && strcmp(input,"quit") != 0 && strcmp(input,"DELETE") != 0 && strcmp(input,"delete") != 0 &&
+	     strcmp(input,"PRINT") != 0 && strcmp(input,"print") != 0 && strcmp(input,"ADD") != 0 && strcmp(input,"add") != 0) {
+      cout << "Command not recognized" << endl;
+    }
   }
 }
