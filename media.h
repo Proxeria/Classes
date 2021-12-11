@@ -8,7 +8,8 @@ class media {
   media(char*, int);
   char* getTitle();
   int getYear();
- private:
+  virtual void print();
+ protected:
   char* title;
   int year;
 };
