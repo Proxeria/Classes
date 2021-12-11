@@ -5,20 +5,20 @@
 using namespace std;
 
 media::media() {
-  description = new char[80];
-  id = 0;
+  title = new char[80];
+  year = 0;
 }
 
-media::media(char* newdescription) {
-  description = new char[80];
-  strcpy(description, newdescription);
-  id = 0;
+media::media(char* newtitle) {
+  title = new char[80];
+  strcpy(title, newtitle);
+  year = 0;
 }
 
-char* media::getDescription() {
-  return description;
+char* media::getTitle() {
+  return title;
 }
 
-int media::getID() {
-  return id;
+int media::getYear() {
+  return year;
 }

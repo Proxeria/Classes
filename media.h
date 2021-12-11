@@ -7,9 +7,9 @@ class media {
  public:
   media();
   media(char*);
-  char* getDescription();
-  int getID();
+  char* getTitle();
+  int getYear();
  private:
-  char* description;
-  int id;
+  char* title;
+  int year;
 };
