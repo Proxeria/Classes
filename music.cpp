@@ -13,6 +13,13 @@ music::music(char* newTitle, int newYear, char* newPublisher, char* newDuration,
   strcpy(artist, newArtist);
 }
 
+music::~music() {
+  delete(publisher);
+  delete(duration);
+  delete(artist);
+  cout << "music deconstructor" << endl;
+}
+
 char* music::getDuration() {
   return duration;
 }

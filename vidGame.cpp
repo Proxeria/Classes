@@ -11,6 +11,12 @@ vidGame::vidGame(char* newTitle, int newYear, char* newPublisher, char* newRatin
   strcpy(publisher, newPublisher);
 }
 
+vidGame::~vidGame() {
+  delete(publisher);
+  delete(rating);
+  cout << "vidGame deconstructor" << endl;
+}
+
 char* vidGame::getRating() {
   return rating;
 }

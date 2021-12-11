@@ -13,6 +13,13 @@ movie::movie(char* newTitle, int newYear, char* newDirector, char* newRating, ch
   strcpy(duration, newDuration);
 }
 
+movie::~movie() {
+  delete(rating);
+  delete(director);
+  delete(duration);
+  cout << "movie destructor" << endl;
+}
+
 char* movie::getRating() {
   return rating;
 }

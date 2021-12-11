@@ -10,6 +10,11 @@ media::media(char* newtitle, int newYear) {
   year = newYear;
 }
 
+media::~media() {
+  cout << "media destructor" << endl;
+  delete(title);
+}
+
 char* media::getTitle() {
   return title;
 }

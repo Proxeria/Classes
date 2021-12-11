@@ -7,6 +7,7 @@ using namespace std;
 class movie : public media {
  public:
   movie(char* title, int year, char* director, char* rating, char* duration);
+  virtual ~movie();
   char* getDirect();
   char* getRating();
   char* getDuration();

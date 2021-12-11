@@ -35,6 +35,14 @@ int main() {
   vect.push_back(list[3]);
   vect.push_back(list[4]);
   printVectorTitles(vect);
+  for (int i = 0; i < SIZE; i++) {
+    if (list[i] == NULL) {
+      break;
+    }
+    else {
+      delete(list[i]); 
+    }
+  }
 }
 
 void printArrayTitles(media** newlist, int size) {
