@@ -4,6 +4,7 @@
 #include <string.h>
 #include "vidGame.h"
 #include "music.h"
+#include "movie.h"
 
 using namespace std;
 
@@ -26,11 +27,13 @@ int main() {
   list[1] = new media(secondTitle, 1998);
   list[2] = new vidGame((char*)"Third Title", 12232, (char*)"Bungie", (char*)"M");
   list[3] = new music((char*)"Fourth Title", 23123, (char*)"Bungo", (char*)"7:27", (char*)"Beck");
+  list[4] = new movie((char*)"Fifth Title", 8712634, (char*)"bungus", (char*)"R", (char*)"2:72");
   printArrayTitles(list, SIZE);
   vect.push_back(list[0]);
   vect.push_back(list[1]);
   vect.push_back(list[2]);
   vect.push_back(list[3]);
+  vect.push_back(list[4]);
   printVectorTitles(vect);
 }
 
