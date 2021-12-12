@@ -28,13 +28,13 @@ int test() {
   list[2] = new vidGame((char*)"Third Title", 12232, (char*)"Bungie", (char*)"M");
   list[3] = new music((char*)"Fourth Title", 23123, (char*)"Bungo", (char*)"7:27", (char*)"Beck");
   list[4] = new movie((char*)"Fifth Title", 8712634, (char*)"bungus", (char*)"R", (char*)"2:72");
-  printArrayTitles(list, SIZE);
-  vect.push_back(list[0]);
-  vect.push_back(list[1]);
-  vect.push_back(list[2]);
-  vect.push_back(list[3]);
-  vect.push_back(list[4]);
-  printVectorTitles(vect);
+  //printArrayTitles(list, SIZE);
+  //vect.push_back(list[0]);
+  //vect.push_back(list[1]);
+  //vect.push_back(list[2]);
+  //vect.push_back(list[3]);
+  //vect.push_back(list[4]);
+  //printVectorTitles(vect);
   for (int i = 0; i < SIZE; i++) {
     if (list[i] == NULL) {
       break;
@@ -131,26 +131,68 @@ movie* getMovie() {
   return new movie(tempTitle, tempYear, tempDirect, tempRating, tempDur);
 }
 
-int main() {
-  test();
-  
-  char input[50];
+void search(vector<media*> &vectMedia, bool doDelete = false) {
+  char tempIn[50];
+  int delYear;
+  char delTitle[50];
+  cout << "Would you like to search by year or title? (Year/Title)" << endl;
+  cin.getline(tempIn, 50, '\n');
+  if (strcmp(tempIn,"Year") == 0 || strcmp(tempIn,"year") == 0) {
+    //fix wording
+    cout << "Enter the year of the media you would like to remove from the list: " << endl;
+    cin.getline(tempIn, 50, '\n');
+    delYear = atoi (tempIn);
+    vector<media*>::iterator it;
+    for (it = vectMedia.begin(); it != vectMedia.end();) {
+      if (delYear == (*it)->getYear()) {
+	(*it)->print();
+	cout << endl;
+	if (doDelete) {
+	  cout << "Do you want to delete this media? (y/n): " << endl;
+	  cin.getline(tempIn, 50, '\n');
+	  if (strcmp(tempIn,"Y") == 0 || strcmp(tempIn,"y") == 0) {
+	    delete((*it));
+	    it = vectMedia.erase(it);
+	    cout << "del worked" << endl;
+	  }
+	  else {
+	    it++;
+	  }
+	}
+	else {
+	  it++;
+	}
+      }
+      else {
+	it++;
+      }
+      cout << "looped" << endl;
+    }
+    cout << "loop end" << endl;
+  }
+}
 
+int main() {
+  //test();
+
+  char input[50];
+  
   vector<media*> vectMedia;
   
   while (true) {
     //initialize empty media vector
     //print possible cmds
     cout << "COMMANDS: "<< endl << "ADD: Create a new entry to the media list"
-         << endl << "PRINT: Prints all current entries in the media list"
-         << endl << "DELETE: Deletes speciied media from the list"
-         << endl << "QUIT: Exits the program" << endl;
+	 << endl << "SEARCH: Search for a specific piece of media by title or year"
+	 << endl << "DELETE: Deletes speciied media from the list"
+	 << endl << "QUIT: Exits the program" << endl;
     cin.getline(input, 50, '\n');
     //if ADD, add new media
     if (strcmp(input,"ADD") == 0 || strcmp(input,"add") == 0) {
       char tempIn[50];
       //make user choose media type to add
       cout << "What type of media would you linke to add? (Music, Game, or Movie): " << endl;
+      cin.getline(tempIn, 50, '\n');
       if (strcmp(tempIn,"Music") == 0 || strcmp(tempIn,"music") == 0) {
 	vectMedia.push_back(getMusic());
 	cout << "Music added!" << endl;
@@ -164,23 +206,15 @@ int main() {
 	cout << "Movie added!" << endl;
       }
     }
-    //if PRINT, print all currently stored medias
-    else if (strcmp(input,"PRINT") == 0 || strcmp(input,"print") == 0) {
-      printVectorTitles(vectMedia);
+    //if SEARCH, print all currently stored medias
+    else if (strcmp(input,"SEARCH") == 0 || strcmp(input,"search") == 0) {
+      search(vectMedia, false);
+      //printVectorTitles(vectMedia);
     }
     //if DELETE, delete media from list
     else if (strcmp(input,"DELETE") == 0 || strcmp(input,"delete") == 0) {
-      int delYear;
-      cout << "Enter the year of the media you would like to remove from the list: " << endl;
-      cin.getline(input, 50, '\n');
-      delYear = atoi (input);
-      vector<media*>::iterator it;
-      for (it = vectMedia.begin(); it != vectMedia.end(); it++) {
-	if (delYear == (*it)->getYear()) {
-	  delete((*it));
-	  vectMedia.erase(it);
-	}
-      }
+      search(vectMedia, true);
+      cout << "search worked" << endl;
     }
     //if QUIT, exit program
     else if (strcmp(input,"QUIT") == 0 || strcmp(input,"quit") == 0) {
@@ -193,3 +227,4 @@ int main() {
     }
   }
 }
+
