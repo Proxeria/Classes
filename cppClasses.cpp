@@ -153,7 +153,7 @@ void search(vector<media*> &vectMedia, bool doDelete = false) {
 	  if (strcmp(tempIn,"Y") == 0 || strcmp(tempIn,"y") == 0) {
 	    delete((*it));
 	    it = vectMedia.erase(it);
-	    cout << "del worked" << endl;
+	    // cout << "del worked" << endl;
 	  }
 	  else {
 	    it++;
@@ -166,9 +166,41 @@ void search(vector<media*> &vectMedia, bool doDelete = false) {
       else {
 	it++;
       }
-      cout << "looped" << endl;
+      // cout << "looped" << endl;
     }
-    cout << "loop end" << endl;
+    //cout << "loop end" << endl;
+  }
+  else {
+    //fix wording
+    cout << "Enter the title of the media you would like to remove from the list: " << endl;
+    cin.getline(delTitle, 50, '\n');
+    vector<media*>::iterator it;
+    for (it = vectMedia.begin(); it != vectMedia.end();) {
+      if (strcmp(delTitle, (*it)->getTitle()) == 0) {
+	(*it)->print();
+	cout << endl;
+	if (doDelete) {
+	  cout << "Do you want to delete this media? (y/n): " << endl;
+	  cin.getline(tempIn, 50, '\n');
+	  if (strcmp(tempIn,"Y") == 0 || strcmp(tempIn,"y") == 0) {
+	    delete((*it));
+	    it = vectMedia.erase(it);
+	    // cout << "del worked" << endl;
+	  }
+	  else {
+	    it++;
+	  }
+	}
+	else {
+	  it++;
+	}
+      }
+      else {
+	it++;
+      }
+      // cout << "looped" << endl;
+    }
+    // cout << "loop end" << endl;
   }
 }
 
