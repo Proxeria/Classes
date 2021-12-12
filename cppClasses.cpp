@@ -75,19 +75,60 @@ music* getMusic() {
   char tempDur[50];
   char tempArt[50];
   //change to cstring stuff
-  cout << "Musis title: ";
+  cout << "Song title: ";
   cin.getline(tempTitle, 50, '\n');
   cout << "Year produced: ";
   cin.getline(input, 50, '\n');
   tempYear = atoi(input);
   cout << "Music publisher: ";
   cin.getline(tempPublish, 50, '\n');
-  cout << "Music duration: ";
+  cout << "Song duration (in seconds): ";
   cin.getline(tempDur, 50, '\n');
   cout << "Music artist: ";
   cin.getline(tempArt, 50, '\n');
 
   return new music(tempTitle, tempYear, tempPublish, tempDur, tempArt);
+}
+
+vidGame* getGame() {
+  char input[50];
+  char tempTitle[50];
+  int tempYear;
+  char tempPublish[50];
+  char tempRating[50];
+  cout << "Game title: ";
+  cin.getline(tempTitle, 50, '\n');
+  cout << "Year released: ";
+  cin.getline(input, 50, '\n');
+  tempYear = atoi(input);
+  cout << "Game publisher: ";
+  cin.getline(tempPublish, 50, '\n');
+  cout << "Game rating: ";
+  cin.getline(tempRating, 50, '\n');
+
+  return new vidGame(tempTitle, tempYear, tempPublish, tempRating);
+}
+
+movie* getMovie() {
+  char input[50];
+  char tempTitle[50];
+  int tempYear;
+  char tempDirect[50];
+  char tempRating[50];
+  char tempDur[50];
+  cout << "Movie title: ";
+  cin.getline(tempTitle, 50, '\n');
+  cout << "Year released: ";
+  cin.getline(input, 50, '\n');
+  tempYear = atoi(input);
+  cout << "Director: ";
+  cin.getline(tempDirect, 50, '\n');
+  cout << "Movie rating: ";
+  cin.getline(tempRating, 50, '\n');
+  cout << "Movie duration (in seconds): ";
+  cin.getline(tempDur, 50, '\n');
+
+  return new movie(tempTitle, tempYear, tempDirect, tempRating, tempDur);
 }
 
 int main() {
@@ -107,8 +148,21 @@ int main() {
     cin.getline(input, 50, '\n');
     //if ADD, add new media
     if (strcmp(input,"ADD") == 0 || strcmp(input,"add") == 0) {
-      vectMedia.push_back(getMusic());
-      cout << "Media added! " << endl;
+      char tempIn[50];
+      //make user choose media type to add
+      cout << "What type of media would you linke to add? (Music, Game, or Movie): " << endl;
+      if (strcmp(tempIn,"Music") == 0 || strcmp(tempIn,"music") == 0) {
+	vectMedia.push_back(getMusic());
+	cout << "Music added!" << endl;
+      }
+      else if (strcmp(tempIn,"Game") == 0 || strcmp(tempIn,"game") == 0) {
+	vectMedia.push_back(getGame());
+	cout << "Game added!" << endl;
+      }
+      if (strcmp(tempIn,"Movie") == 0 || strcmp(tempIn,"movie") == 0) {
+	vectMedia.push_back(getMovie());
+	cout << "Movie added!" << endl;
+      }
     }
     //if PRINT, print all currently stored medias
     else if (strcmp(input,"PRINT") == 0 || strcmp(input,"print") == 0) {
